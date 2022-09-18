@@ -2,9 +2,9 @@ import React from 'react';
 
 function Curtidas(props) {
   return (
-    <div class="curtidas">
+    <div className="curtidas">
       <img src={props.curtidas.usuario.img} alt={props.curtidas.usuario.nickname} />
-      <div class="texto">
+      <div className="texto">
         Curtido por <strong>{props.curtidas.usuario.nickname}</strong> e <strong>outras {props.curtidas.quantidade[0].toLocaleString('pt-BR')} pessoas</strong>
       </div>
     </div>
@@ -44,7 +44,7 @@ function BotaoSalvar(props) {
 
 function AcoesSuperior() {
   return (
-    <div class="acoes">
+    <div className="acoes">
       <ion-icon name="ellipsis-horizontal"></ion-icon>
     </div>
   );
@@ -52,7 +52,7 @@ function AcoesSuperior() {
 
 function AcoesInferior(props) {
   return (
-    <div class="acoes">
+    <div className="acoes">
       <div>
         <BotaoCurtir curtidas={props.curtidas} />
         <ion-icon name="chatbubble-outline"></ion-icon>
@@ -67,7 +67,7 @@ function AcoesInferior(props) {
 
 function Fundo(props) {
   return (
-    <div class="fundo">
+    <div className="fundo">
       <AcoesInferior curtidas={props.curtidas} salvar={props.salvar} />
       <Curtidas curtidas={props.curtidas} />
     </div>
@@ -76,7 +76,7 @@ function Fundo(props) {
 
 function Conteudo(props) {
   return (
-    <div class="conteudo">
+    <div className="conteudo">
       <img
         onClick={() => {
           if (!props.curtidas.curtir[0]) {
@@ -92,7 +92,7 @@ function Conteudo(props) {
 
 function Usuario(props) {
   return (
-    <div class="usuario">
+    <div className="usuario">
       <img src={props.usuario.img} alt={props.usuario.nickname} />
       {props.usuario.nickname}
     </div>
@@ -101,7 +101,7 @@ function Usuario(props) {
 
 function Topo(props) {
   return (
-    <div class="topo">
+    <div className="topo">
       <Usuario usuario={props.usuario} />
       <AcoesSuperior />
     </div>
@@ -110,7 +110,7 @@ function Topo(props) {
 
 function Post(props) {
   return (
-    <div class="post">
+    <div className="post">
       <Topo usuario={props.post.usuario} />
       <Conteudo conteudo={props.post.conteudo} curtidas={props.post.curtidas} />
       <Fundo curtidas={props.post.curtidas} salvar={props.post.salvar} />
@@ -135,7 +135,7 @@ export default function Posts(props) {
   ]
 
   return (
-    <div class="posts">
+    <div className="posts">
       {posts.map(p => <Post post={p} />)}
     </div>
   );
