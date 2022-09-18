@@ -1,37 +1,74 @@
+import React from 'react';
+
 function Curtidas(props) {
   return (
     <div class="curtidas">
-      <img src={props.curtidas.usuario.img} alt={props.curtidas.usuario.nickname}/>
+      <img src={props.curtidas.usuario.img} alt={props.curtidas.usuario.nickname} />
       <div class="texto">
-        Curtido por <strong>{props.curtidas.usuario.nickname}</strong> e <strong>outras {props.curtidas.quantidade} pessoas</strong>
+        Curtido por <strong>{props.curtidas.usuario.nickname}</strong> e <strong>outras {props.curtidas.quantidade[0].toLocaleString('pt-BR')} pessoas</strong>
       </div>
     </div>
   );
 }
 
-function Acoes(props) {
-  return (props.flag === "superior" ? (
+function BotaoCurtir(props) {
+  if (props.curtidas.curtir[0]) {
+    return (
+      <ion-icon
+        onClick={() => {
+          props.curtidas.curtir[1](!props.curtidas.curtir[0]);
+          props.curtidas.quantidade[1](props.curtidas.quantidade[0]-1);
+        }}
+        style={{ "color": "red" }} 
+        name="heart-sharp">
+      </ion-icon>);
+  } else {
+    return (
+      <ion-icon
+        onClick={() => {
+          props.curtidas.curtir[1](!props.curtidas.curtir[0]);
+          props.curtidas.quantidade[1](props.curtidas.quantidade[0]+1);
+        }}
+        name="heart-outline">
+      </ion-icon>);
+  }
+}
+
+function BotaoSalvar(props) {
+  if (props.salvar[0]) {
+    return <ion-icon onClick={() => props.salvar[1](!props.salvar[0])} name="bookmark-sharp"></ion-icon>;
+  } else {
+    return <ion-icon onClick={() => props.salvar[1](!props.salvar[0])} name="bookmark-outline"></ion-icon>;
+  }
+}
+
+function AcoesSuperior() {
+  return (
     <div class="acoes">
       <ion-icon name="ellipsis-horizontal"></ion-icon>
-    </div>)
-    :
-    (<div class="acoes">
+    </div>
+  );
+}
+
+function AcoesInferior(props) {
+  return (
+    <div class="acoes">
       <div>
-        <ion-icon name="heart-outline"></ion-icon>
+        <BotaoCurtir curtidas={props.curtidas} />
         <ion-icon name="chatbubble-outline"></ion-icon>
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
       <div>
-        <ion-icon name="bookmark-outline"></ion-icon>
+        <BotaoSalvar salvar={props.salvar} />
       </div>
-    </div>)
+    </div>
   );
 }
 
 function Fundo(props) {
   return (
     <div class="fundo">
-      <Acoes flag="inferior" />
+      <AcoesInferior curtidas={props.curtidas} salvar={props.salvar} />
       <Curtidas curtidas={props.curtidas} />
     </div>
   );
@@ -40,7 +77,7 @@ function Fundo(props) {
 function Conteudo(props) {
   return (
     <div class="conteudo">
-      <img src={props.conteudo.img} alt={props.conteudo.img.slice(11, -4)}/>
+      <img src={props.conteudo.img} alt={props.conteudo.img.slice(11, -4)} />
     </div>
   );
 }
@@ -58,7 +95,7 @@ function Topo(props) {
   return (
     <div class="topo">
       <Usuario usuario={props.usuario} />
-      <Acoes flag="superior" />
+      <AcoesSuperior />
     </div>
   );
 }
@@ -68,7 +105,7 @@ function Post(props) {
     <div class="post">
       <Topo usuario={props.post.usuario} />
       <Conteudo conteudo={props.post.conteudo} />
-      <Fundo curtidas={props.post.curtidas} />
+      <Fundo curtidas={props.post.curtidas} salvar={props.post.salvar} />
     </div>
   );
 }
@@ -78,12 +115,14 @@ export default function Posts(props) {
     {
       usuario: { nickname: "meowed", img: "assets/img/meowed.svg" },
       conteudo: { img: "assets/img/gato-telefone.svg" },
-      curtidas: { usuario: { nickname: "respondeai", img: "assets/img/respondeai.svg" }, quantidade: "101.523" }
+      curtidas: { usuario: { nickname: "respondeai", img: "assets/img/respondeai.svg" }, quantidade: React.useState(101523), curtir: React.useState(false) },
+      salvar: React.useState(false)
     },
     {
       usuario: { nickname: "barked", img: "assets/img/barked.svg" },
       conteudo: { img: "assets/img/dog.svg" },
-      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: "99.159" }
+      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: React.useState(99159), curtir: React.useState(false) },
+      salvar: React.useState(false)
     }
   ]
 
