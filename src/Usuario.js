@@ -1,24 +1,53 @@
-function EsteUsuario(props) {
+import React from 'react';
+
+function EditarNomeUsuario(props) {
+  return (
+    <ion-icon
+      onClick={() => {
+        props.setUsuario({
+          nickname: props.usuario.nickname,
+          nome: prompt("Insira abaixo o novo nome:"),
+          img: props.usuario.img
+        });
+      }}
+      name="pencil">
+    </ion-icon>
+  );
+}
+
+function ImagemUsuario(props) {
+  return (
+    <img
+      onClick={() => {
+        props.setUsuario({
+          nickname: props.usuario.nickname,
+          nome: props.usuario.nome,
+          img: prompt("Insira abaixo o link da nova imagem:")
+        });
+      }}
+      src={props.usuario.img}
+      alt={props.usuario.nickname}
+    />
+  );
+}
+
+export default function Usuario() {
+  let [usuario, setUsuario] = React.useState({
+    nickname: "catanacomics",
+    nome: "Catana",
+    img: "assets/img/catanacomics.svg"
+  });
+
   return (
     <div className="usuario">
-      <img src={props.usuario.img} alt={props.usuario.nickname}/>
+      <ImagemUsuario usuario={usuario} setUsuario={setUsuario} />
       <div className="texto">
-        <strong>{props.usuario.nickname}</strong>
+        <strong>{usuario.nickname}</strong>
         <span>
-          {props.usuario.nome}
-          <ion-icon name="pencil"></ion-icon>
+          {usuario.nome}
+          <EditarNomeUsuario usuario={usuario} setUsuario={setUsuario} />
         </span>
       </div>
     </div>
   );
-}
-
-export default function Usuario(props) {
-  let usuario = {
-    nickname: "catanacomics",
-    nome: "Catana",
-    img: "assets/img/catanacomics.svg"
-  }
-  
-  return <Usuario usuario={usuario} /> 
 }

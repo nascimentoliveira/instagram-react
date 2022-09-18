@@ -136,7 +136,7 @@ export default function Posts(props) {
 
   return (
     <div className="posts">
-      {posts.map(p => <Post post={p} />)}
+      {posts.map((postagem, indice) => <Post post={postagem} key={indice} />)}
     </div>
   );
 }

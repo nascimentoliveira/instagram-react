@@ -33,7 +33,7 @@ export default function Stories() {
 
   return (
     <div className="stories">
-      {stories.map(story => <Story img={story.img} usuario={story.usuario} />)}
+      {stories.map((story, indice) => <Story img={story.img} usuario={story.usuario} key={indice}/>)}
       <Setinha />
     </div>
   );

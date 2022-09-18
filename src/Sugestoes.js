@@ -44,7 +44,7 @@ export default function Sugestoes() {
   return (
     <div className="sugestoes">
       <TituloSugestao />
-      {outrosUsuarios.map(sugestao => <Sugestao usuario={sugestao} />)}
+      {outrosUsuarios.map((sugestao, indice) => <Sugestao usuario={sugestao} key={indice}/>)}
     </div>
   );
 }
