@@ -17,9 +17,9 @@ function BotaoCurtir(props) {
       <ion-icon
         onClick={() => {
           props.curtidas.curtir[1](!props.curtidas.curtir[0]);
-          props.curtidas.quantidade[1](props.curtidas.quantidade[0]-1);
+          props.curtidas.quantidade[1](props.curtidas.quantidade[0] - 1);
         }}
-        style={{ "color": "red" }} 
+        style={{ "color": "red" }}
         name="heart-sharp">
       </ion-icon>);
   } else {
@@ -27,7 +27,7 @@ function BotaoCurtir(props) {
       <ion-icon
         onClick={() => {
           props.curtidas.curtir[1](!props.curtidas.curtir[0]);
-          props.curtidas.quantidade[1](props.curtidas.quantidade[0]+1);
+          props.curtidas.quantidade[1](props.curtidas.quantidade[0] + 1);
         }}
         name="heart-outline">
       </ion-icon>);
@@ -77,7 +77,15 @@ function Fundo(props) {
 function Conteudo(props) {
   return (
     <div class="conteudo">
-      <img src={props.conteudo.img} alt={props.conteudo.img.slice(11, -4)} />
+      <img
+        onClick={() => {
+          if (!props.curtidas.curtir[0]) {
+            props.curtidas.curtir[1](true);
+            props.curtidas.quantidade[1](props.curtidas.quantidade[0] + 1);
+          }
+        }}
+        src={props.conteudo.img}
+        alt={props.conteudo.img.slice(11, -4)} />
     </div>
   );
 }
@@ -104,7 +112,7 @@ function Post(props) {
   return (
     <div class="post">
       <Topo usuario={props.post.usuario} />
-      <Conteudo conteudo={props.post.conteudo} />
+      <Conteudo conteudo={props.post.conteudo} curtidas={props.post.curtidas} />
       <Fundo curtidas={props.post.curtidas} salvar={props.post.salvar} />
     </div>
   );
