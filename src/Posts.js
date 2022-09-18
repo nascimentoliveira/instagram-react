@@ -1,7 +1,7 @@
 function Curtidas(props) {
   return (
     <div class="curtidas">
-      <img src={props.curtidas.usuario.img} />
+      <img src={props.curtidas.usuario.img} alt={props.curtidas.usuario.nickname}/>
       <div class="texto">
         Curtido por <strong>{props.curtidas.usuario.nickname}</strong> e <strong>outras {props.curtidas.quantidade} pessoas</strong>
       </div>
@@ -40,7 +40,7 @@ function Fundo(props) {
 function Conteudo(props) {
   return (
     <div class="conteudo">
-      <img src={props.conteudo.img} />
+      <img src={props.conteudo.img} alt={props.conteudo.img.slice(11, -4)}/>
     </div>
   );
 }
@@ -48,7 +48,7 @@ function Conteudo(props) {
 function Usuario(props) {
   return (
     <div class="usuario">
-      <img src={props.usuario.img} />
+      <img src={props.usuario.img} alt={props.usuario.nickname} />
       {props.usuario.nickname}
     </div>
   );
