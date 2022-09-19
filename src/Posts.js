@@ -12,33 +12,8 @@ function Curtidas(props) {
   );
 }
 
-function BotaoCurtir(props) {
-  let [curtir, setCurtir] = props.curtidas.curtir;
-  let [quantidade, setQuantidade] = props.curtidas.quantidade;
-  if (curtir) {
-    return (
-      <ion-icon
-        onClick={() => {
-          setCurtir(!curtir);
-          setQuantidade(quantidade - 1);
-        }}
-        style={{ "color": "#ED4956", "animation": "animacaoAcao .5s ease 0s 1 normal forwards" }}
-        name="heart-sharp">
-      </ion-icon>);
-  } else {
-    return (
-      <ion-icon
-        onClick={() => {
-          setCurtir(!curtir);
-          setQuantidade(quantidade + 1);
-        }}
-        name="heart-outline">
-      </ion-icon>);
-  }
-}
-
 function BotaoSalvar(props) {
-  let [salvar, setSalvar] = props.estadoSalvar;
+  let [salvar, setSalvar] = props.salvo;
   return (salvar ?
     <ion-icon
       onClick={() => setSalvar(!salvar)}
@@ -53,24 +28,41 @@ function BotaoSalvar(props) {
     </ion-icon>);
 }
 
-function AcoesSuperior() {
-  return (
-    <div className="acoes">
-      <ion-icon name="ellipsis-horizontal"></ion-icon>
-    </div>
-  );
+function Botaocutido(props) {
+  let [cutido, setcutido] = props.curtidas.cutido;
+  let [quantidade, setQuantidade] = props.curtidas.quantidade;
+  if (cutido) {
+    return (
+      <ion-icon
+        onClick={() => {
+          setcutido(!cutido);
+          setQuantidade(quantidade - 1);
+        }}
+        style={{ "color": "#ED4956", "animation": "animacaoAcao .5s ease 0s 1 normal forwards" }}
+        name="heart-sharp">
+      </ion-icon>);
+  } else {
+    return (
+      <ion-icon
+        onClick={() => {
+          setcutido(!cutido);
+          setQuantidade(quantidade + 1);
+        }}
+        name="heart-outline">
+      </ion-icon>);
+  }
 }
 
 function AcoesInferior(props) {
   return (
     <div className="acoes">
       <div>
-        <BotaoCurtir curtidas={props.curtidas} />
+        <Botaocutido curtidas={props.curtidas} />
         <ion-icon name="chatbubble-outline"></ion-icon>
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
       <div>
-        <BotaoSalvar estadoSalvar={props.estadoSalvar} />
+        <BotaoSalvar salvo={props.salvo} />
       </div>
     </div>
   );
@@ -79,13 +71,13 @@ function AcoesInferior(props) {
 function Fundo(props) {
   return (
     <div className="fundo">
-      <AcoesInferior curtidas={props.curtidas} estadoSalvar={props.estadoSalvar} />
+      <AcoesInferior curtidas={props.curtidas} salvo={props.salvo} />
       <Curtidas curtidas={props.curtidas} />
     </div>
   );
 }
 
-function CurtirIcone(props) {
+function CutidoIcone(props) {
   if (props.estado) {
     return <ion-icon name="heart-sharp"></ion-icon>
   } else {
@@ -94,7 +86,7 @@ function CurtirIcone(props) {
 }
 
 function Conteudo(props) {
-  let [curtir, setCurtir] = props.curtidas.curtir;
+  let [cutido, setcutido] = props.curtidas.cutido;
   let [quantidade, setQuantidade] = props.curtidas.quantidade;
   let [clicado, setClicado] = React.useState(false)
 
@@ -104,14 +96,22 @@ function Conteudo(props) {
         onDoubleClick={() => {
           setClicado(true)
           setTimeout(() => setClicado(false), 1000);
-          if (!curtir) {
-            setCurtir(true);
+          if (!cutido) {
+            setcutido(true);
             setQuantidade(quantidade + 1);
           }
         }}
         src={props.conteudo.img}
         alt={props.conteudo.img.slice(11, -4)} />
-      <CurtirIcone estado={clicado} />
+      <CutidoIcone estado={clicado} />
+    </div>
+  );
+}
+
+function AcoesSuperior() {
+  return (
+    <div className="acoes">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
     </div>
   );
 }
@@ -139,7 +139,7 @@ function Post(props) {
     <div className="post">
       <Topo usuario={props.post.usuario} />
       <Conteudo conteudo={props.post.conteudo} curtidas={props.post.curtidas} />
-      <Fundo curtidas={props.post.curtidas} estadoSalvar={props.post.estadoSalvar} />
+      <Fundo curtidas={props.post.curtidas} salvo={props.post.salvo} />
     </div>
   );
 }
@@ -149,20 +149,20 @@ export default function Posts() {
     {
       usuario: { nickname: "meowed", img: "assets/img/meowed.svg" },
       conteudo: { img: "assets/img/gato-telefone.svg" },
-      curtidas: { usuario: { nickname: "respondeai", img: "assets/img/respondeai.svg" }, quantidade: React.useState(101523), curtir: React.useState(false) },
-      estadoSalvar: React.useState(false)
+      curtidas: { usuario: { nickname: "respondeai", img: "assets/img/respondeai.svg" }, quantidade: React.useState(101523), cutido: React.useState(false) },
+      salvo: React.useState(false)
     },
     {
       usuario: { nickname: "barked", img: "assets/img/barked.svg" },
       conteudo: { img: "assets/img/dog.svg" },
-      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: React.useState(99159), curtir: React.useState(false) },
-      estadoSalvar: React.useState(false)
+      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: React.useState(99159), cutido: React.useState(false) },
+      salvo: React.useState(false)
     }
-  ]
+  ];
 
   return (
     <div className="posts">
-      {posts.map((postagem, indice) => <Post post={postagem} key={indice} />)}
+      {posts.map((post, indice) => <Post post={post} key={indice} />)}
     </div>
   );
 }

@@ -2,15 +2,6 @@ function Seguir() {
   return <div className="seguir">Seguir</div>
 }
 
-function TituloSugestao() {
-  return (
-    <div className="titulo">
-      Sugestões para você
-      <div>Ver tudo</div>
-    </div>
-  );
-}
-
 function Usuario(props) {
   return (
     <div className="usuario">
@@ -32,6 +23,15 @@ function Sugestao(props) {
   );
 }
 
+function TituloSugestao() {
+  return (
+    <div className="titulo">
+      Sugestões para você
+      <div>Ver tudo</div>
+    </div>
+  );
+}
+
 export default function Sugestoes() {
   const outrosUsuarios = [
     { nickname: "bad.vibes.memes", img: "assets/img/bad.vibes.memes.svg", relacao: "Segue você" },
@@ -44,7 +44,7 @@ export default function Sugestoes() {
   return (
     <div className="sugestoes">
       <TituloSugestao />
-      {outrosUsuarios.map((sugestao, indice) => <Sugestao usuario={sugestao} key={indice}/>)}
+      {outrosUsuarios.map((sugestao, indice) => <Sugestao usuario={sugestao} key={indice} />)}
     </div>
   );
 }
