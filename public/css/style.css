@@ -202,13 +202,13 @@ body {
 }
 
 .post .conteudo ion-icon {
-  width: 50%;
-  height: 50%;
+  width: 30%;
+  height: 30%;
   position: absolute;
   z-index: 1;
-  color: rgba(241, 241, 241, 0.5);
-  right: 25%;
-  bottom: 25%;
+  color: rgba(241, 241, 241, 0.9);
+  right: 35%;
+  bottom: 35%;
   animation: animacaoCurtir 1s ease 0s 1 normal forwards;
 }
 

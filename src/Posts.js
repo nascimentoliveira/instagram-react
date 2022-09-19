@@ -22,7 +22,7 @@ function BotaoCurtir(props) {
           setCurtir(!curtir);
           setQuantidade(quantidade - 1);
         }}
-        style={{ "color": "red", "animation": "animacaoAcao .5s ease 0s 1 normal forwards" }}
+        style={{ "color": "#ED4956", "animation": "animacaoAcao .5s ease 0s 1 normal forwards" }}
         name="heart-sharp">
       </ion-icon>);
   } else {
@@ -43,7 +43,7 @@ function BotaoSalvar(props) {
     <ion-icon
       onClick={() => setSalvar(!salvar)}
       name="bookmark-sharp"
-      style={{ "animation": "animacaoAcao .5s ease 0s 1 normal both" }}
+      style={{ "color": "#262626", "animation": "animacaoAcao .5s ease 0s 1 normal both" }}
     >
     </ion-icon> :
     <ion-icon
@@ -155,7 +155,7 @@ export default function Posts() {
     {
       usuario: { nickname: "barked", img: "assets/img/barked.svg" },
       conteudo: { img: "assets/img/dog.svg" },
-      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: React.useState(99159), curtir: React.useState(false)},
+      curtidas: { usuario: { nickname: "adorable_animals", img: "assets/img/adorable_animals.svg" }, quantidade: React.useState(99159), curtir: React.useState(false) },
       estadoSalvar: React.useState(false)
     }
   ]
