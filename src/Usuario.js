@@ -1,14 +1,20 @@
 import React from 'react';
 
 function EditarNomeUsuario(props) {
+  let novoNome = "";
   return (
     <ion-icon
       onClick={() => {
-        props.setUsuario({
-          nickname: props.usuario.nickname,
-          nome: prompt("Insira abaixo o novo nome:"),
-          img: props.usuario.img
-        });
+        novoNome = prompt("Insira abaixo o link da nova imagem:")
+        if (novoNome !== null && novoNome.trim().length > 0) {
+          props.setUsuario({
+            nickname: props.usuario.nickname,
+            nome: novoNome,
+            img: props.usuario.img
+          });
+        } else {
+          alert("Não foi possivel alterar o nome. Tente novamente!");
+        }
       }}
       name="pencil">
     </ion-icon>
@@ -16,14 +22,20 @@ function EditarNomeUsuario(props) {
 }
 
 function ImagemUsuario(props) {
+  let novaImagem = "";
   return (
     <img
       onClick={() => {
-        props.setUsuario({
-          nickname: props.usuario.nickname,
-          nome: props.usuario.nome,
-          img: prompt("Insira abaixo o link da nova imagem:")
-        });
+        novaImagem = prompt("Insira abaixo o link da nova imagem:")
+        if (novaImagem !== null && novaImagem.trim().length > 0) {
+          props.setUsuario({
+            nickname: props.usuario.nickname,
+            nome: props.usuario.nome,
+            img: novaImagem
+          });
+        } else {
+          alert("Não foi possivel alterar imagem. Tente novamente!");
+        }
       }}
       src={props.usuario.img}
       alt={props.usuario.nickname}
