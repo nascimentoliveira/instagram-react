@@ -79,7 +79,7 @@ function Fundo(props) {
 
 function CutidoIcone(props) {
   if (props.estado) {
-    return <ion-icon name="heart-sharp"></ion-icon>
+    return <ion-icon name="heart-sharp"></ion-icon>;
   } else {
     return null;
   }
@@ -88,21 +88,24 @@ function CutidoIcone(props) {
 function Conteudo(props) {
   let [cutido, setcutido] = props.curtidas.cutido;
   let [quantidade, setQuantidade] = props.curtidas.quantidade;
-  let [clicado, setClicado] = React.useState(false)
+  let [clicado, setClicado] = React.useState(false);
+  const duracaoAnim = 1000;
+  const inicioNomeArquivo = 11;
+  const fimNomeArquivo = -4;
 
   return (
     <div className="conteudo">
       <img
         onDoubleClick={() => {
-          setClicado(true)
-          setTimeout(() => setClicado(false), 1000);
+          setClicado(true);
+          setTimeout(() => setClicado(false), duracaoAnim);
           if (!cutido) {
             setcutido(true);
             setQuantidade(quantidade + 1);
           }
         }}
         src={props.conteudo.img}
-        alt={props.conteudo.img.slice(11, -4)} />
+        alt={props.conteudo.img.slice(inicioNomeArquivo, fimNomeArquivo)} />
       <CutidoIcone estado={clicado} />
     </div>
   );

@@ -1,5 +1,5 @@
 function Seguir() {
-  return <div className="seguir">Seguir</div>
+  return <div className="seguir">Seguir</div>;
 }
 
 function Usuario(props) {
